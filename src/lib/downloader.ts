@@ -24,7 +24,7 @@ export async function download(id: string|number, outDir: string) {
     
     let data = await getDataForSound(id).catch(err => err.toString())
     if (typeof data == "string") {
-        console.error(`${chalk.bold(id)} ${chalk.blueBright("Download")} ${chalk.bold.red("!")} getData failed: ${chalk.bold(data)}. Skipping this ID.`);
+        console.error(`${chalk.white.bold(id)} ${chalk.blueBright("Download")} ${chalk.bold.red("!")} getData failed: ${chalk.bold(data)}. Skipping this ID.`);
         return
     }
     console.log(`${chalk.bold(id)} ${chalk.blueBright("Download")} Requesting file from ${chalk.bold(data.url)}`)

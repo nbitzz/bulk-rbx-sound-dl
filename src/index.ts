@@ -21,7 +21,7 @@ program.command("file")
         let contents = await readFile(file)
 
         for (let x of contents.toString().split(options.separator)) {
-            download(x, options.output)
+            await download(x, options.output)
         }
         
     })

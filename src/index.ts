@@ -2,6 +2,7 @@ import { Command } from "commander";
 import { readFile } from "fs/promises";
 import { randomBytes } from "node:crypto"
 import { outFolder } from "./lib/helpers";
+import { getURLForSound } from "./lib/downloader";
 
 const program = new Command()
     .name("bulk-rbx-sound-dl")
@@ -15,10 +16,20 @@ program.command("file")
     .option("-o, --output <folder>", "folder to output to", `RBXSoundDownloader.${randomBytes(12).toString()}`)
     .action(async (file, options) => {
         
-        outFolder(options.output) // check if output folder is Real
+        await outFolder(options.output) // check if output folder is Real
 
-        let fl = await readFile(file);
-        fl.toString().split(options.separator)
+        let contents = await readFile(file);
+        contents.toString().split(options.separator)
+        
+    })
+    
+program.command("extract")
+    .description("Get a Roblox audio's source URL")
+    .argument("<string>", "Roblox asset ID for a sound")
+    .action(async (str) => {
+        
+        console.log(await getURLForSound(str))
+        
     })
 
 program.parse()

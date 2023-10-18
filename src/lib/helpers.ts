@@ -5,7 +5,7 @@ import chalk from "chalk"
 
 export async function outFolder(out: string) {
     // try to locate output...
-    console.log(`${chalk.blueBright("outDir")} Locating output directory`)
+    console.log(`${chalk.blueBright("OutDir")} Locating output directory`)
 
     if (existsSync(out)) {
 

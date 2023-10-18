@@ -13,7 +13,7 @@ program.command("file")
     .description('Download Roblox sounds from IDs located in a file')
     .argument("<file>", "filename containing IDs you would like to download")
     .option("-s, --separator <char>", "character to split file on", "\n")
-    .option("-o, --output <folder>", "folder to output to", `RBXSoundDownloader.${randomBytes(12).toString()}`)
+    .option("-o, --output <folder>", "folder to output to", `RBXSoundDownloader.${randomBytes(12).toString("hex")}`)
     .action(async (file, options) => {
         
         await outFolder(options.output) // check if output folder is Real

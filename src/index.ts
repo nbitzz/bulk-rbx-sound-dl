@@ -18,8 +18,11 @@ program.command("file")
         
         await outFolder(options.output) // check if output folder is Real
 
-        let contents = await readFile(file);
-        contents.toString().split(options.separator)
+        let contents = await readFile(file)
+
+        for (let x of contents.toString().split(options.separator)) {
+            download(x, options.output)
+        }
         
     })
     

@@ -9,14 +9,14 @@ export async function outFolder(out: string) {
 
     if (existsSync(out)) {
 
-        console.log("Output target exists; verifying that it is a directory...");
+        console.log(`${chalk.blueBright("OutDir")} Output target exists; verifying that it is a directory...`);
         if ((await stat(out)).isDirectory()) throw new Error(`Object ${resolve(out)} is not a directory`);
 
     } else {
 
-        console.log(`${chalk.blueBright("outDir")} ${chalk.bold.red("!")} Output target does not exist; creating directory ${resolve(out)}...`)
+        console.log(`${chalk.blueBright("OutDir")} ${chalk.bold.red("!")} Output target does not exist; creating directory ${resolve(out)}...`)
         await mkdir(out)
 
     }
-    console.log(`${chalk.blueBright("outDir")} Output directory: ${resolve(out)}`)
+    console.log(`${chalk.blueBright("OutDir")} Output directory: ${resolve(out)}`)
 }

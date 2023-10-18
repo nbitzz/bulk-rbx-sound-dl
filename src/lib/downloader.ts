@@ -41,6 +41,6 @@ export async function download(id: string|number, outDir: string) {
     let fileName = `${data.name} - ${id}.${ext}`
 
     writeFile(join(outDir, fileName), nodebuf)
-    console.log(`${chalk.bold(id)} ${chalk.blueBright("Download")} ${chalk.bold.greenBright(`Wrote file ${join(outDir, fileName)} to disk`)}`)
+    console.log(`${chalk.bold(id)} ${chalk.blueBright("Download")} ${chalk.greenBright(`Wrote file ${join(outDir, fileName)} to disk`)}`)
 
 }

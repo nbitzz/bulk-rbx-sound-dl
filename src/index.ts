@@ -25,7 +25,7 @@ program.command("file")
             if (x) await download(x, options.output)
         }
 
-        console.log(chalk.bold.brightGreen(`All sounds have been downloaded to the ${options.output} folder.`))
+        console.log(chalk.bold.greenBright(`All sounds have been downloaded to the ${options.output} folder.`))
         
     })
     

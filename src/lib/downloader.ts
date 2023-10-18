@@ -4,7 +4,7 @@ import bytes from "bytes";
 import { writeFile } from "fs/promises";
 import { join } from "path";
 
-export async function getURLForSound(id:string|number) {
+export async function getDataForSound(id:string|number) {
     console.log(`${chalk.bold(id)} ${chalk.blueBright("GetURL")} Requesting webpage`)
     let response = await fetch(`https://www.roblox.com/library/${id}/`)
 
@@ -13,18 +13,19 @@ export async function getURLForSound(id:string|number) {
     
     let $ = load(await response.text())
     let url = $(".icon-play.MediaPlayerIcon").attr("data-mediathumb-url")
+    let name = $(".border-bottom.item-name-container > h1").contents().text()
 
     if (!url) throw new Error(`url was not found for asset id ${id}`)
 
-    return url
+    return {url, name}
 }
 
 export async function download(id: string|number, outDir: string) {
     
-    let url = await getURLForSound(id)
-    console.log(`${chalk.bold(id)} ${chalk.blueBright("Download")} Requesting file from ${chalk.bold(url)}`)
+    let data = await getDataForSound(id)
+    console.log(`${chalk.bold(id)} ${chalk.blueBright("Download")} Requesting file from ${chalk.bold(data.url)}`)
 
-    let response = await fetch(url)
+    let response = await fetch(data.url)
     console.log(`${chalk.bold(id)} ${chalk.blueBright("Download")} Size: ${chalk.bold(bytes(parseInt(response.headers.get("content-length") ?? "0",10)))}`)
 
     let buf = await response.arrayBuffer()
@@ -36,7 +37,10 @@ export async function download(id: string|number, outDir: string) {
         : "mp3" // fuck you roblox, provide a content-type fucker
 
     console.log(`${chalk.bold(id)} ${chalk.blueBright("Download")} Audio type: ${chalk.bold(ext)}`)
-    writeFile(join(outDir, `${id}.${ext}`), nodebuf)
-    console.log(`${chalk.bold(id)} ${chalk.blueBright("Download")} ${chalk.bold.greenBright(`Wrote file ${join(outDir, `${id}.${ext}`)} to disk`)}`)
+
+    let fileName = `${data.name} - ${id}.${ext}`
+
+    writeFile(join(outDir, fileName), nodebuf)
+    console.log(`${chalk.bold(id)} ${chalk.blueBright("Download")} ${chalk.bold.greenBright(`Wrote file ${join(outDir, fileName)} to disk`)}`)
 
 }

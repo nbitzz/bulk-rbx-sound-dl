@@ -3,6 +3,7 @@ import { readFile } from "fs/promises";
 import { randomBytes } from "node:crypto"
 import { outFolder } from "./lib/helpers";
 import { download, getDataForSound } from "./lib/downloader";
+import chalk from "chalk";
 
 const program = new Command()
     .name("bulk-rbx-sound-dl")
@@ -21,8 +22,10 @@ program.command("file")
         let contents = await readFile(file)
 
         for (let x of contents.toString().split(options.separator)) {
-            await download(x, options.output)
+            if (x) await download(x, options.output)
         }
+
+        console.log(chalk.bold.brightGreen(`All sounds have been downloaded to the ${options.output} folder.`))
         
     })
     

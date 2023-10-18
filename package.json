@@ -1,0 +1,20 @@
+{
+  "name": "bulk-rbx-sound-dl",
+  "version": "1.0.0",
+  "description": "Bulk Roblox sound downloader",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "nbitzz",
+  "license": "Unlicense",
+  "dependencies": {
+    "@types/cheerio": "^0.22.33",
+    "chalk": "^5.3.0",
+    "cheerio": "^1.0.0-rc.12",
+    "commander": "^11.1.0",
+    "typescript": "^5.2.2"
+  }
+}
